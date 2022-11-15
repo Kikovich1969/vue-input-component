@@ -10,8 +10,9 @@ import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { faSquareMinus } from '@fortawesome/free-solid-svg-icons';
 import { faPercent } from '@fortawesome/free-solid-svg-icons';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
 /* add icons to the library */
-library.add(faSquarePlus, faSquareMinus, faPercent, faSquareCheck);
+library.add(faSquarePlus, faSquareMinus, faPercent, faSquareCheck, faCoins);
 
 import "./assets/main.css";
 

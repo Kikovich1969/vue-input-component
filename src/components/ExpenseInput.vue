@@ -36,7 +36,9 @@ export default {
   <section>
     <div v-if="showDiscountInput">
       <input type="number" v-model.number="discount" />
-      <button @click="calculateDiscount"><font-awesome-icon icon="fa-solid fa-square-check" size="lg" /></button>
+      <button @click="calculateDiscount">
+        <font-awesome-icon icon="fa-solid fa-square-check" size="lg" />
+      </button>
     </div>
     <div>
       <input
@@ -59,3 +61,23 @@ export default {
     </div>
   </section>
 </template>
+
+<style scoped>
+input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #6f7264;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #6f7264;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+</style>
