@@ -16,7 +16,7 @@ export default {
   },
   watch: {
     expenses: {
-      handler(oldValue, newValue){
+      handler(){
         this.inputCount = this.expenses.length;
         this.evaluateResult();
       },

@@ -11,7 +11,10 @@ export default {
   },
   methods: {
     calculateDiscount() {
-      this.calculatedDiscount = (this.expense - (this.expense / 100) * this.discount).toFixed(2);
+      this.calculatedDiscount = (
+        this.expense -
+        (this.expense / 100) * this.discount
+      ).toFixed(2);
       this.discount = 0;
       this.showDiscountInput = false;
     },
@@ -32,11 +35,8 @@ export default {
 <template>
   <section>
     <div v-if="showDiscountInput">
-      <input
-        type="number"
-        v-model.number="discount"
-      />
-      <button @click="calculateDiscount">Add discount</button>
+      <input type="number" v-model.number="discount" />
+      <button @click="calculateDiscount"><font-awesome-icon icon="fa-solid fa-square-check" size="lg" /></button>
     </div>
     <div>
       <input
@@ -44,14 +44,18 @@ export default {
         :value="expense"
         @input="$emit('update:expense', $event.target.value)"
       />
-      <button @click="$emit('addExpenseInput')">Add Expense</button>
+      <button @click="$emit('addExpenseInput')">
+        <font-awesome-icon icon="fa-solid fa-square-plus" size="lg" />
+      </button>
       <button
         v-if="!hideRemoveButton"
         @click="$emit('removeExpenseInput', index)"
       >
-        Remove Expense
+        <font-awesome-icon icon="fa-solid fa-square-minus" size="lg" />
       </button>
-      <button @click="toggleDiscountInput">Discount</button>
+      <button @click="toggleDiscountInput">
+        <font-awesome-icon icon="fa-solid fa-percent" size="lg" />
+      </button>
     </div>
   </section>
 </template>
