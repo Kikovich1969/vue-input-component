@@ -1,8 +1,8 @@
 <script>
-import TheTest from "./components/TheTest.vue";
+import ExpenseInput from "./components/ExpenseInput.vue";
 
 export default {
-  components: { TheTest },
+  components: { ExpenseInput },
   data() {
     return {
       expenses: [
@@ -10,16 +10,27 @@ export default {
       ],
       evaluatedResult: 0,
       nextId: 1,
+      inputCount: 1,
+      isOnlyOneInput: true,
     };
   },
   watch: {
     expenses: {
-      handler(){
-        console.log('Expenses changed!');
+      handler(oldValue, newValue){
+        this.inputCount = this.expenses.length;
         this.evaluateResult();
       },
       deep: true
     },
+    inputCount: {
+      handler(){
+        if(this.inputCount <= 1){
+          this.isOnlyOneInput = true;
+        } else {
+          this.isOnlyOneInput = false;
+        }
+      }
+    }
   },
   methods: {
     evaluateResult(){
@@ -40,15 +51,16 @@ export default {
 
 <template>
   <div>
-    <the-test
+    <expense-input
       v-for="(expense, index) in expenses"
       v-model:expense.number="expense.amount"
       :key="expense.id"
       :index="index"
-      @add-button="addExpenseInput"
-      @remove-button="removeExpenseInput"
-    ></the-test>
-    <p>{{ evaluatedResult }}</p>
+      :hideRemoveButton="isOnlyOneInput"
+      @add-expense-input="addExpenseInput"
+      @remove-expense-input="removeExpenseInput"
+    ></expense-input>
+    <p>Summe: {{ evaluatedResult }}</p>
   </div>
 </template>
 
