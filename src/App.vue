@@ -6,7 +6,7 @@ export default {
   components: { ExpenseInput, TheHeader },
   data() {
     return {
-      expenses: [{ amount: 0, id: 0 }],
+      expenses: [{ amount: null, id: 0 }],
       evaluatedResult: 0,
       nextId: 1,
       inputCount: 1,
@@ -23,11 +23,14 @@ export default {
     },
     inputCount: {
       handler() {
-        if (this.inputCount <= 1) {
-          this.isOnlyOneInput = true;
-        } else {
-          this.isOnlyOneInput = false;
-        }
+        this.isOnlyOneInput = (this.inputCount <= 1) ? true : false;
+      },
+    },
+    evaluatedResult: {
+      handler(oldValue, newValue) {
+        console.log(newValue);
+        console.log(oldValue);
+        //this.evaluatedResult = newValue.toFixed(2);
       },
     },
   },
@@ -39,7 +42,7 @@ export default {
       });
     },
     addExpenseInput() {
-      this.expenses.push({ amount: 0, id: this.nextId++ });
+      this.expenses.push({ amount: null, id: this.nextId++ });
     },
     removeExpenseInput(index) {
       this.expenses.splice(index, 1);
@@ -50,6 +53,7 @@ export default {
 
 <template>
   <the-header></the-header>
+  <h2>Gemeinsame Ausgaben:</h2>
   <div>
     <expense-input
       v-for="(expense, index) in expenses"
@@ -60,7 +64,7 @@ export default {
       @add-expense-input="addExpenseInput"
       @remove-expense-input="removeExpenseInput"
     ></expense-input>
-    <p>Summe: {{ evaluatedResult }}</p>
+    <p><strong>Summe</strong>: {{ evaluatedResult }} Euro</p>
   </div>
 </template>
 

@@ -17,6 +17,7 @@
   display: flex;
   justify-content: center;
   background-color: #fff;
+  margin-bottom: 2rem;
 }
 #header-section > div {
   display: flex;
