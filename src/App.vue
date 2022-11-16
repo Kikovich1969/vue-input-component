@@ -1,9 +1,10 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
+import CategorySelect from "./components/CategorySelect.vue";
 
 export default {
-  components: { ExpenseInput, TheHeader },
+  components: { ExpenseInput, TheHeader, CategorySelect },
   data() {
     return {
       expenses: [{ amount: null, id: 0 }],
@@ -23,7 +24,7 @@ export default {
     },
     inputCount: {
       handler() {
-        this.isOnlyOneInput = (this.inputCount <= 1) ? true : false;
+        this.isOnlyOneInput = this.inputCount <= 1 ? true : false;
       },
     },
     evaluatedResult: {
@@ -53,11 +54,13 @@ export default {
 
 <template>
   <the-header></the-header>
-  <h2>Gemeinsame Ausgaben:</h2>
   <div>
+    <category-select
+      labelForInput="Kategorie"></category-select>
     <expense-input
       v-for="(expense, index) in expenses"
       v-model:expense.number="expense.amount"
+      labelForInput="Gemeinsame Ausgaben"
       :key="expense.id"
       :index="index"
       :hideRemoveButton="isOnlyOneInput"
@@ -79,5 +82,11 @@ body {
   padding: 1rem;
   width: 300px;
   border: 1px solid #505050;
+}
+label {
+  font-size: 1.25rem;
+  font-weight: 300;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 </style>

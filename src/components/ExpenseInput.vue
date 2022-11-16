@@ -1,6 +1,6 @@
 <script>
 export default {
-  props: ["expense", "index", "hideRemoveButton"],
+  props: ["expense", "index", "hideRemoveButton", "labelForInput"],
   emits: ["update:expense", "addExpenseInput", "removeExpenseInput"],
   data() {
     return {
@@ -20,7 +20,7 @@ export default {
     },
     toggleDiscountInput() {
       this.showDiscountInput = !this.showDiscountInput;
-      if(this.showDiscountInput){
+      if (this.showDiscountInput) {
         this.focusOnDiscountInput();
       }
     },
@@ -43,6 +43,7 @@ export default {
 
 <template>
   <section>
+    <label for="expense-input">{{ labelForInput }}</label>
     <div class="form-input add-discount" v-if="showDiscountInput">
       <div class="left-decorator">
         <font-awesome-icon icon="fa-solid fa-percent" size="lg" />
