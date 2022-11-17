@@ -1,12 +1,14 @@
 <script>
 export default {
-  props: ["expense", "index", "hideRemoveButton", "labelForInput"],
+  props: ["expense", "index", "numberOfInputs", "labelForInput"],
   emits: ["update:expense", "addExpenseInput", "removeExpenseInput"],
   data() {
     return {
       discount: null,
       calculatedDiscount: 0,
       showDiscountInput: false,
+      showLabel: true,
+      inputCount: this.numberOfInputs,
     };
   },
   methods: {
@@ -26,7 +28,6 @@ export default {
     },
     focusOnDiscountInput() {
       this.$nextTick(() => {
-        console.log(this.$refs);
         this.$refs.discountInput.focus();
       });
     },
@@ -37,16 +38,21 @@ export default {
         this.$emit("update:expense", this.calculatedDiscount);
       },
     },
+    inputCount: {
+      handler() {
+        this.showLabel = this.inputCount > 1 ? false : true;
+      },
+    },
   },
 };
 </script>
 
 <template>
   <section>
-    <label for="expense-input">{{ labelForInput }}</label>
+    <label for="expense-input" v-if="this.inputCount == 1">{{ labelForInput }}</label>
     <div class="form-input add-discount" v-if="showDiscountInput">
       <div class="left-decorator">
-        <font-awesome-icon icon="fa-solid fa-percent" size="lg" />
+        <font-awesome-icon icon="fa-solid fa-percent" />
       </div>
       <input
         type="number"
@@ -60,12 +66,12 @@ export default {
         class="btn right-decorator"
         title="Rabatt hinzufügen"
       >
-        <font-awesome-icon icon="fa-solid fa-check" size="lg" />
+        <font-awesome-icon icon="fa-solid fa-check" />
       </button>
     </div>
     <div class="form-input">
       <div class="left-decorator">
-        <font-awesome-icon icon="fa-solid fa-euro-sign" size="lg" />
+        <font-awesome-icon icon="fa-solid fa-euro-sign" />
       </div>
       <input
         placeholder="Ausgabe"
@@ -75,26 +81,26 @@ export default {
         @input="$emit('update:expense', $event.target.value)"
       />
       <button
+        class="btn right-decorator"
+        title="Ausgabe löschen"
+        v-if="this.inputCount > 1"
+        @click="$emit('removeExpenseInput', index)"
+      >
+        <font-awesome-icon icon="fa-solid fa-minus" />
+      </button>
+      <button
         @click="$emit('addExpenseInput')"
         class="btn right-decorator"
         title="Ausgabe hinzufügen"
       >
-        <font-awesome-icon icon="fa-solid fa-plus" size="lg" />
-      </button>
-      <button
-        class="btn right-decorator"
-        title="Ausgabe löschen"
-        v-if="!hideRemoveButton"
-        @click="$emit('removeExpenseInput', index)"
-      >
-        <font-awesome-icon icon="fa-solid fa-minus" size="lg" />
+        <font-awesome-icon icon="fa-solid fa-plus" />
       </button>
       <button
         @click="toggleDiscountInput"
         class="btn right-decorator"
         title="Füge einen Rabatt hinzu"
       >
-        <font-awesome-icon icon="fa-solid fa-percent" size="lg" />
+        <font-awesome-icon icon="fa-solid fa-percent" />
       </button>
     </div>
   </section>

@@ -11,7 +11,6 @@ export default {
       evaluatedResult: 0,
       nextId: 1,
       inputCount: 1,
-      isOnlyOneInput: true,
     };
   },
   watch: {
@@ -22,16 +21,10 @@ export default {
       },
       deep: true,
     },
-    inputCount: {
-      handler() {
-        this.isOnlyOneInput = this.inputCount <= 1 ? true : false;
-      },
-    },
     evaluatedResult: {
       handler(oldValue, newValue) {
         console.log(newValue);
         console.log(oldValue);
-        //this.evaluatedResult = newValue.toFixed(2);
       },
     },
   },
@@ -63,7 +56,7 @@ export default {
       labelForInput="Gemeinsame Ausgaben"
       :key="expense.id"
       :index="index"
-      :hideRemoveButton="isOnlyOneInput"
+      :numberOfInputs="this.inputCount"
       @add-expense-input="addExpenseInput"
       @remove-expense-input="removeExpenseInput"
     ></expense-input>
