@@ -1,6 +1,6 @@
 <script>
 export default {
-  props: ["expense", "index", "numberOfInputs", "labelForInput"],
+  props: ["expense", "index", "numberOfInputs"],
   emits: ["update:expense", "addExpenseInput", "removeExpenseInput"],
   data() {
     return {
@@ -49,13 +49,15 @@ export default {
 
 <template>
   <section>
-    <label for="expense-input" v-if="this.inputCount == 1">{{ labelForInput }}</label>
+    <!-- <label for="expense-input" v-if="this.inputCount == 1">{{ labelForInput }}</label> -->
+    <label for="expense-input" v-if="this.inputCount == 1"><slot></slot></label>
     <div class="form-input add-discount" v-if="showDiscountInput">
       <div class="left-decorator">
         <font-awesome-icon icon="fa-solid fa-percent" />
       </div>
       <input
         type="number"
+        min="0"
         ref="discountInput"
         v-model.number="discount"
         class="has-right-decorator has-left-decorator"
@@ -74,9 +76,10 @@ export default {
         <font-awesome-icon icon="fa-solid fa-euro-sign" />
       </div>
       <input
+        type="number"
+        min="0"
         placeholder="Ausgabe"
         class="has-right-decorator has-left-decorator"
-        type="number"
         :value="expense"
         @input="$emit('update:expense', $event.target.value)"
       />

@@ -14,9 +14,10 @@ import { faPercent } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
 import { faEuroSign } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 /* add icons to the library */
-library.add(faPlus, faMinus, faPercent, faCheck, faCoins, faEuroSign);
+library.add(faPlus, faMinus, faPercent, faCheck, faCoins, faEuroSign, faCaretDown);
 
 import "./assets/main.css";
 

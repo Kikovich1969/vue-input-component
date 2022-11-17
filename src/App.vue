@@ -48,18 +48,16 @@ export default {
 <template>
   <the-header></the-header>
   <div>
-    <category-select
-      labelForInput="Kategorie"></category-select>
+    <category-select>Kategorie</category-select>
     <expense-input
       v-for="(expense, index) in expenses"
       v-model:expense.number="expense.amount"
-      labelForInput="Gemeinsame Ausgaben"
       :key="expense.id"
       :index="index"
       :numberOfInputs="this.inputCount"
       @add-expense-input="addExpenseInput"
       @remove-expense-input="removeExpenseInput"
-    ></expense-input>
+    >Gemeinsame Ausgaben</expense-input>
     <p><strong>Summe</strong>: {{ evaluatedResult }} Euro</p>
   </div>
 </template>
