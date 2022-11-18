@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       expenses: [{ amount: null, id: 0 }],
+      expenses_zinka: [{ amount: null, id: 0 }],
       evaluatedResult: 0,
       nextId: 1,
       inputCount: 1,
@@ -58,6 +59,17 @@ export default {
       @add-expense-input="addExpenseInput"
       @remove-expense-input="removeExpenseInput"
     >Gemeinsame Ausgaben</expense-input>
+
+    <expense-input
+      v-for="(expense_zinka, index) in expenses_zinka"
+      v-model:expense_zinka.number="expense_zinka.amount"
+      :key="expense_zinka.id"
+      :index="index"
+      :numberOfInputs="this.inputCount"
+      @add-expense-input="addExpenseInput"
+      @remove-expense-input="removeExpenseInput"
+    >Ausgaben Schmetterling</expense-input>
+
     <p><strong>Summe</strong>: {{ evaluatedResult }} Euro</p>
   </div>
 </template>
