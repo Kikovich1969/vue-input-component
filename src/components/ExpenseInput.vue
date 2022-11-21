@@ -1,7 +1,7 @@
 <script>
 export default {
-  props: ["expense", "index", "numberOfInputs"],
-  emits: ["update:expense", "addExpenseInput", "removeExpenseInput"],
+  props: ["costs", "index", "numberOfInputs"],
+  emits: ["update:costs", "addExpenseInput", "removeExpenseInput"],
   data() {
     return {
       discount: null,
@@ -13,10 +13,7 @@ export default {
   },
   methods: {
     calculateDiscount() {
-      this.calculatedDiscount = (
-        this.expense -
-        (this.expense / 100) * this.discount
-      ).toFixed(2);
+      this.calculatedDiscount = (this.costs - (this.costs / 100) * this.discount).toFixed(2);
       this.discount = null;
       this.showDiscountInput = false;
     },
@@ -35,7 +32,7 @@ export default {
   watch: {
     calculatedDiscount: {
       handler() {
-        this.$emit("update:expense", this.calculatedDiscount);
+        this.$emit("update:costs", this.calculatedDiscount);
       },
     },
     inputCount: {
@@ -80,8 +77,8 @@ export default {
         min="0"
         placeholder="Ausgabe"
         class="has-right-decorator has-left-decorator"
-        :value="expense"
-        @input="$emit('update:expense', $event.target.value)"
+        :value="costs"
+        @input="$emit('update:costs', $event.target.value)"
       />
       <button
         class="btn right-decorator"

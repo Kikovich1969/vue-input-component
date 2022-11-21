@@ -3,10 +3,6 @@ export default {
   props: [],
   methods: {
     openSelectOptions() {
-      const e = new Event("change");
-      this.$refs.categorySelect.dispatchEvent(e);
-      /* this.$refs.categorySelect.click(); */
-      /* this.$refs.categorySelect.trigger("change"); */
       console.log(this.$refs.categorySelect);
     },
   },
