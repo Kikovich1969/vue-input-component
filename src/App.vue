@@ -12,34 +12,66 @@ export default {
         zinka: [{ amount: null, id: 0 }],
         chris: [{ amount: null, id: 0 }],
       },
-      evaluatedResult: 0,
       nextId: 1,
       inputCount: 1,
+      expensesBoth: 0,
+      expensesZinka: 0,
+      expensesChris: 0,
     };
   },
+  computed: {
+    evaluateResult() {
+      return this.expensesBoth + this.expensesZinka + this.expensesChris;
+    },
+  },
   watch: {
-    expenses: {
-      handler(newValue) {
-        /* console.log("Changed!");
-        console.log(newValue); */
-        this.evaluateResult(newValue);
+    "expenses.both": {
+      handler(data) {
+        this.expensesBoth = 0;
+        for (const [key, value] of Object.entries(data)) {
+          if (
+            value.amount !== undefined &&
+            value.amount !== null &&
+            value.amount !== ""
+          ) {
+            this.expensesBoth += value.amount;
+          }
+        }
+      },
+      deep: true,
+    },
+    "expenses.zinka": {
+      handler(data) {
+        this.expensesZinka = 0;
+        for (const [key, value] of Object.entries(data)) {
+          if (
+            value.amount !== undefined &&
+            value.amount !== null &&
+            value.amount !== ""
+          ) {
+            this.expensesZinka += value.amount;
+          }
+        }
+      },
+      deep: true,
+    },
+    "expenses.chris": {
+      handler(data) {
+        this.expensesChris = 0;
+        for (const [key, value] of Object.entries(data)) {
+          if (
+            value.amount !== undefined &&
+            value.amount !== null &&
+            value.amount !== ""
+          ) {
+            this.expensesChris += value.amount;
+          }
+        }
       },
       deep: true,
     },
   },
-  computed: {},
   methods: {
-    evaluateResult(newValue) {
-      this.evaluatedResult = 0;
-      console.log(newValue);
-      for(expensesArray in newValue){
-        console.log(expensesArray);
-      }
-      //newValue.forEach((element) => {
-      //  this.evaluatedResult = this.evaluatedResult + element.amount;
-        //this.evaluatedResult = this.evaluatedResult + element.amount;
-      //});
-    },
     addExpenseInput(dataObject) {
       dataObject.push({ amount: null, id: this.nextId++ });
       this.inputCount++;
@@ -93,7 +125,10 @@ export default {
       >Ausgaben Guza</expense-input
     >
 
-    <p><strong>Summe</strong>: {{ evaluatedResult }} Euro</p>
+    <p>Gemeinsame Ausgaben: {{ expensesBoth }} Euro</p>
+    <p>Zinkas Ausgaben: {{ expensesZinka }} Euro</p>
+    <p>Guzas Ausgaben: {{ expensesChris }} Euro</p>
+    <p><strong>Summe</strong>: {{ evaluateResult }} Euro</p>
   </div>
 </template>
 
