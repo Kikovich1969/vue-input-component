@@ -1,10 +1,9 @@
 <script>
 export default {
-  props: [],
+  props: ["vendor", "vendorCategories"],
+  emits: ["update:vendor"],
   methods: {
-    openSelectOptions() {
-      console.log(this.$refs.categorySelect);
-    },
+
   },
   data() {
     return {
@@ -32,10 +31,10 @@ export default {
   <section>
     <label for="category-select"><slot></slot></label>
     <div class="form-input">
-      <button class="left-decorator" @click="openSelectOptions">
+      <button class="left-decorator">
         <font-awesome-icon icon="fa-solid fa-caret-down" />
       </button>
-      <select class="has-left-decorator" ref="categorySelect">
+      <select class="has-left-decorator" @change="$emit('update:vendor', $event.target.value)">
         <option
           v-for="category in categoryOptions"
           value="category.id"

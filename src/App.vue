@@ -12,16 +12,36 @@ export default {
         zinka: [{ amount: null, id: 0 }],
         chris: [{ amount: null, id: 0 }],
       },
+      categoryOptions: [
+        { id: 1, name: "Billa" },
+        { id: 2, name: "BIPA" },
+        { id: 12, name: "DM" },
+        { id: 3, name: "Naschmarkt" },
+        { id: 4, name: "Etsan" },
+        { id: 5, name: "Restaurant" },
+        { id: 6, name: "Brunch" },
+        { id: 7, name: "Hofer" },
+        { id: 8, name: "IKEA" },
+        { id: 10, name: "Spar" },
+        { id: 11, name: "OBI" },
+        { id: 13, name: "Kino" },
+        { id: 9, name: "Andere" },
+      ],
       nextId: 1,
       inputCount: 1,
       expensesBoth: 0,
       expensesZinka: 0,
       expensesChris: 0,
+      selectedVendor: '',
     };
   },
   computed: {
     evaluateResult() {
-      return this.expensesBoth + this.expensesZinka + this.expensesChris;
+      return (
+        this.expensesBoth +
+        this.expensesZinka +
+        this.expensesChris
+      ).toFixed(2);
     },
   },
   watch: {
@@ -87,7 +107,7 @@ export default {
 <template>
   <the-header></the-header>
   <div>
-    <category-select>Kategorie</category-select>
+    <category-select v-model:vendor="selectedVendor" vendorCategories="this.categoryOptions">Kategorie</category-select>
 
     <!-- Expenses for Zinka and Chris -->
     <expense-input
@@ -125,6 +145,7 @@ export default {
       >Ausgaben Guza</expense-input
     >
 
+    <p>Verkäufer: {{ selectedVendor }}</p>
     <p>Gemeinsame Ausgaben: {{ expensesBoth }} Euro</p>
     <p>Zinkas Ausgaben: {{ expensesZinka }} Euro</p>
     <p>Guzas Ausgaben: {{ expensesChris }} Euro</p>
