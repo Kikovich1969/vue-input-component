@@ -6,3 +6,32 @@
   margin-right: auto;
   padding-top: 0;
 }
+
+.btn {
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.btn-signal:hover {
+  color: #ebebeb;
+  background: #81b313;
+  transition: all 0.3s ease;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-group button {
+  width: 100%;
+  text-align: center;
+}
+
+.btn-signal {
+  background: #9bd817;
+  color: #fff;
+}

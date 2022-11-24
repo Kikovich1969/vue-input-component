@@ -1,10 +1,11 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
+import TheButton from "./components/TheButton.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import CategorySelect from "./components/CategorySelect.vue";
 
 export default {
-  components: { ExpenseInput, TheHeader, CategorySelect },
+  components: { ExpenseInput, TheHeader, CategorySelect, TheButton },
   data() {
     return {
       expenses: {
@@ -107,6 +108,11 @@ export default {
 <template>
   <the-header></the-header>
   <div>
+    <div class="btn-group">
+      <the-button class="btn btn-signal">Zinka</the-button>
+      <the-button class="btn btn-signal">Chris</the-button>
+    </div>
+
     <category-select v-model:vendor="selectedVendor" vendorCategories="this.categoryOptions">Kategorie</category-select>
 
     <!-- Expenses for Zinka and Chris -->
