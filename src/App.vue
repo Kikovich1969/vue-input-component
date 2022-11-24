@@ -33,7 +33,7 @@ export default {
       expensesBoth: 0,
       expensesZinka: 0,
       expensesChris: 0,
-      selectedVendor: '',
+      selectedVendor: "",
     };
   },
   computed: {
@@ -48,46 +48,19 @@ export default {
   watch: {
     "expenses.both": {
       handler(data) {
-        this.expensesBoth = 0;
-        for (const [key, value] of Object.entries(data)) {
-          if (
-            value.amount !== undefined &&
-            value.amount !== null &&
-            value.amount !== ""
-          ) {
-            this.expensesBoth += value.amount;
-          }
-        }
+        this.evaluateExpense(data, "both");
       },
       deep: true,
     },
     "expenses.zinka": {
       handler(data) {
-        this.expensesZinka = 0;
-        for (const [key, value] of Object.entries(data)) {
-          if (
-            value.amount !== undefined &&
-            value.amount !== null &&
-            value.amount !== ""
-          ) {
-            this.expensesZinka += value.amount;
-          }
-        }
+        this.evaluateExpense(data, "zinka");
       },
       deep: true,
     },
     "expenses.chris": {
       handler(data) {
-        this.expensesChris = 0;
-        for (const [key, value] of Object.entries(data)) {
-          if (
-            value.amount !== undefined &&
-            value.amount !== null &&
-            value.amount !== ""
-          ) {
-            this.expensesChris += value.amount;
-          }
-        }
+        this.evaluateExpense(data, "chris");
       },
       deep: true,
     },
@@ -101,6 +74,38 @@ export default {
       dataObject.splice(index, 1);
       this.inputCount--;
     },
+    evaluateExpense(data, who) {
+      switch (who) {
+        case "both":
+          this.expensesBoth = 0;
+          break;
+        case "zinka":
+          this.expensesZinka = 0;
+          break;
+        case "chris":
+          this.expensesChris = 0;
+          break;
+      }
+      for (const [key, value] of Object.entries(data)) {
+        if (
+          value.amount !== undefined &&
+          value.amount !== null &&
+          value.amount !== ""
+        ) {
+          switch (who) {
+            case "both":
+              this.expensesBoth += value.amount;
+              break;
+            case "zinka":
+              this.expensesZinka += value.amount;
+              break;
+            case "chris":
+              this.expensesChris += value.amount;
+              break;
+          }
+        }
+      }
+    },
   },
 };
 </script>
@@ -113,7 +118,11 @@ export default {
       <the-button class="btn btn-signal">Chris</the-button>
     </div>
 
-    <category-select v-model:vendor="selectedVendor" vendorCategories="this.categoryOptions">Kategorie</category-select>
+    <category-select
+      v-model:vendor="selectedVendor"
+      vendorCategories="this.categoryOptions"
+      >Kategorie</category-select
+    >
 
     <!-- Expenses for Zinka and Chris -->
     <expense-input
