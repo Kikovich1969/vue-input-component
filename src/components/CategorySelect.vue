@@ -1,29 +1,7 @@
 <script>
 export default {
-  props: ["vendor", "vendorCategories"],
+  props: ["vendorCategories"],
   emits: ["update:vendor"],
-  methods: {
-
-  },
-  data() {
-    return {
-      categoryOptions: [
-        { id: 1, name: "Billa" },
-        { id: 2, name: "BIPA" },
-        { id: 12, name: "DM" },
-        { id: 3, name: "Naschmarkt" },
-        { id: 4, name: "Etsan" },
-        { id: 5, name: "Restaurant" },
-        { id: 6, name: "Brunch" },
-        { id: 7, name: "Hofer" },
-        { id: 8, name: "IKEA" },
-        { id: 10, name: "Spar" },
-        { id: 11, name: "OBI" },
-        { id: 13, name: "Kino" },
-        { id: 9, name: "Andere" },
-      ],
-    };
-  },
 };
 </script>
 
@@ -35,9 +13,9 @@ export default {
         <font-awesome-icon icon="fa-solid fa-caret-down" />
       </button>
       <select class="has-left-decorator" @change="$emit('update:vendor', $event.target.value)">
+        <option selected>Wähle eine Kategorie</option>
         <option
-          v-for="category in categoryOptions"
-          value="category.id"
+          v-for="category in vendorCategories"
           :key="category.id"
         >
           {{ category.name }}

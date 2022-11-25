@@ -1,7 +1,9 @@
 <template>
   <section id="header-section">
     <div>
-      <h1>WeXpense <font-awesome-icon icon="fa-solid fa-coins" color="#9bd817" /></h1>
+      <h1>
+        WeXpense <font-awesome-icon icon="fa-solid fa-coins" color="#9bd817" />
+      </h1>
       <div class="burger" style="display: block">
         <div class="line1"></div>
         <div class="line2"></div>
@@ -17,7 +19,6 @@
   display: flex;
   justify-content: center;
   background-color: #fff;
-  margin-bottom: 2rem;
 }
 #header-section > div {
   display: flex;

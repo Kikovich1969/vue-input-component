@@ -4,7 +4,7 @@ export default {
   emits: ["update:costs", "addExpenseInput", "removeExpenseInput"],
   data() {
     return {
-      discount: null,
+      discount: 0,
       calculatedDiscount: 0,
       showDiscountInput: false,
       showLabel: true,
@@ -14,7 +14,7 @@ export default {
   methods: {
     calculateDiscount() {
       this.calculatedDiscount = (this.costs - (this.costs / 100) * this.discount).toFixed(2);
-      this.discount = null;
+      this.discount = 0;
       this.showDiscountInput = false;
     },
     toggleDiscountInput() {
@@ -55,6 +55,7 @@ export default {
       <input
         type="number"
         min="0"
+        max="100"
         ref="discountInput"
         v-model.number="discount"
         class="has-right-decorator has-left-decorator"

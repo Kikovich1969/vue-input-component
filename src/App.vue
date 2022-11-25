@@ -3,15 +3,16 @@ import TheHeader from "./components/TheHeader.vue";
 import TheButton from "./components/TheButton.vue";
 import ExpenseInput from "./components/ExpenseInput.vue";
 import CategorySelect from "./components/CategorySelect.vue";
+import LivePanel from "./components/LivePanel.vue";
 
 export default {
-  components: { ExpenseInput, TheHeader, CategorySelect, TheButton },
+  components: { ExpenseInput, TheHeader, CategorySelect, TheButton, LivePanel },
   data() {
     return {
       expenses: {
-        both: [{ amount: null, id: 0 }],
-        zinka: [{ amount: null, id: 0 }],
-        chris: [{ amount: null, id: 0 }],
+        both: [{ amount: 0, id: 0 }],
+        zinka: [{ amount: 0, id: 0 }],
+        chris: [{ amount: 0, id: 0 }],
       },
       categoryOptions: [
         { id: 1, name: "Billa" },
@@ -34,6 +35,7 @@ export default {
       expensesZinka: 0,
       expensesChris: 0,
       selectedVendor: "",
+      currentUser: "",
     };
   },
   computed: {
@@ -43,6 +45,14 @@ export default {
         this.expensesZinka +
         this.expensesChris
       ).toFixed(2);
+    },
+    evaluateCurrentUser() {
+      return this.currentUser === "" ? "Noch nicht gewählt" : this.currentUser;
+    },
+    evaluateCurrentVendor() {
+      return this.selectedVendor === ""
+        ? "Noch nicht gewählt"
+        : this.selectedVendor;
     },
   },
   watch: {
@@ -106,23 +116,35 @@ export default {
         }
       }
     },
+    setVendor(vendor) {
+      this.selectedVendor = vendor;
+    },
+    setCurrentUser(user) {
+      this.currentUser = user;
+    },
+    saveToDatabase() {
+      console.log("Saving with Axios!");
+    },
   },
 };
 </script>
 
 <template>
   <the-header></the-header>
-  <div>
+  <div id="content">
     <div class="btn-group">
-      <the-button class="btn btn-signal">Zinka</the-button>
-      <the-button class="btn btn-signal">Chris</the-button>
+      <the-button class="btn btn-signal" @click="setCurrentUser('Zinka')"
+        >Zinka</the-button
+      >
+      <the-button class="btn btn-signal" @click="setCurrentUser('Chris')"
+        >Chris</the-button
+      >
     </div>
 
     <category-select
-      v-model:vendor="selectedVendor"
-      vendorCategories="this.categoryOptions"
-      >Kategorie</category-select
-    >
+      :vendorCategories="this.categoryOptions"
+      @update:vendor="setVendor"
+    ></category-select>
 
     <!-- Expenses for Zinka and Chris -->
     <expense-input
@@ -133,7 +155,7 @@ export default {
       :numberOfInputs="this.inputCount"
       @add-expense-input="addExpenseInput(expenses.both)"
       @remove-expense-input="removeExpenseInput(index, expenses.both)"
-      >Gemeinsame Ausgaben</expense-input
+      >Gemeinsame Ausgaben:</expense-input
     >
 
     <!-- Expenses only for Zinka -->
@@ -145,7 +167,7 @@ export default {
       :numberOfInputs="this.inputCount"
       @add-expense-input="addExpenseInput(expenses.zinka)"
       @remove-expense-input="removeExpenseInput(index, expenses.zinka)"
-      >Ausgaben Schmetterling</expense-input
+      >Für Schmetterling:</expense-input
     >
 
     <!-- Expenses only for Chris -->
@@ -157,14 +179,23 @@ export default {
       :numberOfInputs="this.inputCount"
       @add-expense-input="addExpenseInput(expenses.chris)"
       @remove-expense-input="removeExpenseInput(index, expenses.chris)"
-      >Ausgaben Guza</expense-input
+      >Für Guza:</expense-input
     >
 
-    <p>Verkäufer: {{ selectedVendor }}</p>
-    <p>Gemeinsame Ausgaben: {{ expensesBoth }} Euro</p>
-    <p>Zinkas Ausgaben: {{ expensesZinka }} Euro</p>
-    <p>Guzas Ausgaben: {{ expensesChris }} Euro</p>
-    <p><strong>Summe</strong>: {{ evaluateResult }} Euro</p>
+    <live-panel>
+      <p>Ausgegeben von: {{ evaluateCurrentUser }}</p>
+      <p>Ausgegeben für: {{ evaluateCurrentVendor }}</p>
+      <p>Gemeinsame Ausgaben: {{ expensesBoth }} Euro</p>
+      <p>Zinkas Ausgaben: {{ expensesZinka }} Euro</p>
+      <p>Guzas Ausgaben: {{ expensesChris }} Euro</p>
+      <p><strong>Summe</strong>: {{ evaluateResult }} Euro</p>
+    </live-panel>
+
+    <div class="btn-group">
+      <the-button class="btn btn-signal" @click="saveToDatabase"
+        >Speichern</the-button
+      >
+    </div>
   </div>
 </template>
 
