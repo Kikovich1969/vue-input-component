@@ -46,7 +46,6 @@ export default {
 
 <template>
   <section>
-    <!-- <label for="expense-input" v-if="this.inputCount == 1">{{ labelForInput }}</label> -->
     <label for="expense-input" v-if="this.inputCount == 1"><slot></slot></label>
     <div class="form-input add-discount" v-if="showDiscountInput">
       <div class="left-decorator">

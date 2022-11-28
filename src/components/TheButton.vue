@@ -1,16 +1,3 @@
-<script>
-export default {
-  emits: [
-    /* "selectUser" */
-  ],
-  data() {
-    return {
-      
-    }
-  },
-}
-</script>
-
 <template>
   <button><slot></slot></button>
 </template>
