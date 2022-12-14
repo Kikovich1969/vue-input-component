@@ -1,0 +1,86 @@
+{
+    "users": [
+        {
+            "name": "Schmetterling",
+            "id": 1
+        },
+        {
+            "name": "Guza",
+            "id": 2
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Billa"
+        },
+        {
+            "id": 2,
+            "name": "BIPA"
+        },
+        {
+            "id": 12,
+            "name": "DM"
+        },
+        {
+            "id": 3,
+            "name": "Naschmarkt"
+        },
+        {
+            "id": 4,
+            "name": "Etsan"
+        },
+        {
+            "id": 5,
+            "name": "Restaurant"
+        },
+        {
+            "id": 6,
+            "name": "Brunch"
+        },
+        {
+            "id": 7,
+            "name": "Hofer"
+        },
+        {
+            "id": 8,
+            "name": "IKEA"
+        },
+        {
+            "id": 10,
+            "name": "Spar"
+        },
+        {
+            "id": 11,
+            "name": "OBI"
+        },
+        {
+            "id": 13,
+            "name": "Kino"
+        },
+        {
+            "id": 9,
+            "name": "Andere"
+        }
+    ],
+    "expenses": {
+        "noExpense": false,
+        "total": 733.27,
+        "user1": {
+            "total": 478.6299999999999,
+            "user1ForUser1": 0,
+            "user1ForUser2": 0,
+            "debts": 131.60000000000002,
+            "debtsDif": 107.71499999999992,
+            "isDebitor": false
+        },
+        "user2": {
+            "total": 254.64000000000004,
+            "user2ForUser2": 36.68,
+            "user2ForUser1": 4.28,
+            "debts": 239.31499999999994,
+            "debtsDif": 107.71499999999992,
+            "isDebitor": true
+        }
+    }
+}
