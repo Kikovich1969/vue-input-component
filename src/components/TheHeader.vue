@@ -2,10 +2,11 @@
   <section id="header-section" class="w-full flex justify-center bg-white">
     <div class="flex justify-between items-center w-full max-w-3xl py-4 px-8">
       <h1 class="text-3xl font-extralight">
-        WeXpense <font-awesome-icon icon="fa-solid fa-coins" color="#9bd817" />
+        WeXpense <font-awesome-icon icon="fa-solid fa-coins" class="text-theme" />
       </h1>
       <button
-        class="text-gray-500 w-10 h-10 relative focus:outline-none bg-white"
+        class="text-gray-500 w-10 h-10 relative focus:outline-none bg-theme rounded"
+        @click="open = !open"
       >
         <div
           class="
@@ -65,11 +66,6 @@
           ></span>
         </div>
       </button>
-      <!-- <div class="burger cursor-pointer block">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-      </div> -->
     </div>
   </section>
 </template>
@@ -83,13 +79,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.burger div {
-  width: 25px;
-  height: 4px;
-  background: #b5d86a;
-  margin: 5px;
-  transition: all 0.25s ease;
-}
-</style>

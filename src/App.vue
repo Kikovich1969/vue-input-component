@@ -198,23 +198,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style>
-body {
-  background-color: #eaf2cd;
-  color: #6f7264;
-  font-family: "Roboto", "Franklin Gothic Medium", Tahoma, sans-serif;
-  height: 100vh;
-}
-#parent {
-  padding: 1rem;
-  width: 300px;
-  border: 1px solid #505050;
-}
-label {
-  font-size: 1.25rem;
-  font-weight: 300;
-  display: inline-block;
-  margin-bottom: 0.5rem;
-}
-</style>

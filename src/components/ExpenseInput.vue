@@ -46,7 +46,7 @@ export default {
 
 <template>
   <section>
-    <label for="expense-input" v-if="this.inputCount == 1"><slot></slot></label>
+    <label for="expense-input" v-if="this.inputCount == 1" class="text-xl font-light inline-block mb-2"><slot></slot></label>
     <div class="form-input add-discount" v-if="showDiscountInput">
       <div class="left-decorator">
         <font-awesome-icon icon="fa-solid fa-percent" />
